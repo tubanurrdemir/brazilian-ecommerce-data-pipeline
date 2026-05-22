@@ -24,6 +24,17 @@ This end-to-end data engineering and analytics project processes real-world e-co
 
 ### 🧠 Advanced Analytics
 * **Cohort & Retention Analysis:** Wrote advanced SQL queries (CTEs, Date Functions) to track customer retention and calculate churn rates over time. You can view the SQL code [here](cohort_analysis.sql).
+
+## 📊 Advanced Analytics & Insights
+
+### 1. Customer Retention (Cohort Analysis)
+We modeled customer loyalty by tracking monthly purchase cohorts. The retention heatmap below highlights the classic e-commerce challenge where the vast majority of customers are one-time buyers:
+
+![Customer Retention Cohort Heatmap](cohort_retention_heatmap.png)
+
+### 2. RFM Segmentation
+The dataset was processed using a custom Python pipeline to evaluate customers based on Recency, Frequency, and Monetary metrics. The final segmented data has been exported as `rfm_summary_report.csv` for targeted marketing campaigns.
+  
 ---
 
 ## 📝 Proje Özeti (Türkçe)
@@ -43,3 +54,13 @@ Bu uçtan uca veri mühendisliği ve analitiği projesi, Brezilya'ya ait gerçek
 
 ### 🧠 İleri Düzey Analitik
 * **Kohort ve Elde Tutma (Retention) Analizi:** Zaman içindeki müşteri sadakatini izlemek ve kayıp (churn) oranlarını hesaplamak için ileri seviye SQL sorguları (CTE'ler, Tarih Fonksiyonları) yazdım. İlgili SQL kodunu [buradan](cohort_analysis.sql) inceleyebilirsiniz.
+
+## 📊 İleri Seviye Veri Analitiği ve İçgörüler
+
+### 1. Müşteri Elde Tutma (Cohort Analizi)
+Müşteri sadakatini, aylık satın alma kohortlarını (gruplarını) takip ederek modelledik. Aşağıdaki elde tutma (retention) ısı haritası, müşterilerin büyük çoğunluğunun tek seferlik alıcı olduğu klasik e-ticaret problemini net bir şekilde ortaya koymaktadır:
+
+![Müşteri Elde Tutma Isı Haritası](cohort_retention_heatmap.png)
+
+### 2. RFM Segmentasyonu
+Veriseti; müşterileri Yenilik (Recency), Sıklık (Frequency) ve Parasal Değer (Monetary) metriklerine göre değerlendirmek ve sınıflandırmak için özel bir Python veri boru hattı (pipeline) kullanılarak işlendi. Hedefli pazarlama kampanyalarında kullanılmak üzere, segmentlere ayrılmış final verisi `rfm_summary_report.csv` olarak dışa aktarıldı.
