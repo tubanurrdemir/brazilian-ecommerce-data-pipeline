@@ -22,6 +22,8 @@ This end-to-end data engineering and analytics project processes real-world e-co
 4. **Model:** A SQL View (`master_satis_tablosu`) is created to join multiple tables for seamless BI integration.
 5. **Visualize:** The optimized data is connected to Tableau to analyze sales performance, regional distribution, and payment methods.
 
+### 🧠 Advanced Analytics
+* **Cohort & Retention Analysis:** Wrote advanced SQL queries (CTEs, Date Functions) to track customer retention and calculate churn rates over time. You can view the SQL code [here](cohort_analysis.sql).
 ---
 
 ## 📝 Proje Özeti (Türkçe)
@@ -38,3 +40,6 @@ Bu uçtan uca veri mühendisliği ve analitiği projesi, Brezilya'ya ait gerçek
 3. **Load (Yükle):** Temizlenmiş veri setleri doğrudan PostgreSQL veritabanına yüklenir.
 4. **Model (Modelle):** Kesintisiz BI (İş Zekası) entegrasyonu için birden fazla tabloyu birleştiren bir SQL Görünümü (`master_satis_tablosu`) oluşturulur.
 5. **Visualize (Görselleştir):** Optimize edilmiş veri, satış performansını, bölgesel dağılımı ve ödeme yöntemlerini analiz etmek için Tableau'ya bağlanır.
+
+### 🧠 İleri Düzey Analitik
+* **Kohort ve Elde Tutma (Retention) Analizi:** Zaman içindeki müşteri sadakatini izlemek ve kayıp (churn) oranlarını hesaplamak için ileri seviye SQL sorguları (CTE'ler, Tarih Fonksiyonları) yazdım. İlgili SQL kodunu [buradan](cohort_analysis.sql) inceleyebilirsiniz.
