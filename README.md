@@ -10,6 +10,16 @@
 ## 📝 Project Overview (English)
 This end-to-end data engineering and analytics project processes real-world e-commerce data from Brazil. The goal of this project is to build an automated ETL pipeline, model the data in a relational database, and create an interactive dashboard for actionable business insights.
 
+## Repository Structure
+
+```text
+├── src/          # Python scripts for ETL and analytics
+├── sql/          # SQL scripts for data modeling and analysis
+├── images/       # Project visuals and generated charts
+├── reports/      # Generated analysis outputs
+└── README.md     # Project documentation
+
+
 ## 🛠️ Tech Stack
 * **Python (Pandas, SQLAlchemy):** Data extraction, cleaning (handling time-traveling records and missing values), and loading.
 * **PostgreSQL:** Relational database management and data modeling.
@@ -30,7 +40,7 @@ This end-to-end data engineering and analytics project processes real-world e-co
 ### 1. Customer Retention (Cohort Analysis)
 We modeled customer loyalty by tracking monthly purchase cohorts. The retention heatmap below highlights the classic e-commerce challenge where the vast majority of customers are one-time buyers:
 
-![Customer Retention Cohort Heatmap](cohort_retention_heatmap.png)
+![Customer Retention Cohort Heatmap](images/cohort_retention_heatmap.png)
 
 ### 2. RFM Segmentation
 The dataset was processed using a custom Python pipeline to evaluate customers based on Recency, Frequency, and Monetary metrics. The final segmented data has been exported as `rfm_summary_report.csv` for targeted marketing campaigns.
@@ -39,6 +49,15 @@ The dataset was processed using a custom Python pipeline to evaluate customers b
 
 ## 📝 Proje Özeti (Türkçe)
 Bu uçtan uca veri mühendisliği ve analitiği projesi, Brezilya'ya ait gerçek dünya e-ticaret verilerini işlemektedir. Bu projenin amacı; otomatik bir ETL boru hattı kurmak, veriyi ilişkisel bir veritabanında modellemek ve iş kararlarına yön verecek interaktif bir gösterge paneli (dashboard) oluşturmaktır.
+
+## Proje Klasör Yapısı
+
+```text
+├── src/          # ETL ve analiz için kullanılan Python dosyaları
+├── sql/          # Veri modelleme ve analiz için SQL dosyaları
+├── images/       # Projede kullanılan görseller ve oluşturulan grafikler
+├── reports/      # Analiz sonucunda oluşturulan rapor dosyaları
+└── README.md     # Proje dokümantasyonu
 
 ## 🛠️ Kullanılan Teknolojiler
 * **Python (Pandas, SQLAlchemy):** Veri çekme, temizleme (zaman yolculuğu yapan hatalı kayıtların ve eksik verilerin ayıklanması) ve yükleme.
@@ -53,7 +72,7 @@ Bu uçtan uca veri mühendisliği ve analitiği projesi, Brezilya'ya ait gerçek
 5. **Visualize (Görselleştir):** Optimize edilmiş veri, satış performansını, bölgesel dağılımı ve ödeme yöntemlerini analiz etmek için Tableau'ya bağlanır.
 
 ### 🧠 İleri Düzey Analitik
-* **Kohort ve Elde Tutma (Retention) Analizi:** Zaman içindeki müşteri sadakatini izlemek ve kayıp (churn) oranlarını hesaplamak için ileri seviye SQL sorguları (CTE'ler, Tarih Fonksiyonları) yazdım. İlgili SQL kodunu [buradan](cohort_analysis.sql) inceleyebilirsiniz.
+* **Kohort ve Elde Tutma (Retention) Analizi:** Zaman içindeki müşteri sadakatini izlemek ve kayıp (churn) oranlarını hesaplamak için ileri seviye SQL sorguları (CTE'ler, Tarih Fonksiyonları) yazdım. İlgili SQL kodunu [buradan](images/cohort_analysis.sql) inceleyebilirsiniz.
 
 ## 📊 İleri Seviye Veri Analitiği ve İçgörüler
 
