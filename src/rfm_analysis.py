@@ -5,16 +5,26 @@ calculates RFM metrics, assigns scores, segments customers using Regex,
 and generates an executive summary report for business intelligence.
 """
 
+import os
 import pandas as pd
 import datetime as dt
 from sqlalchemy import create_engine
-
+from dotenv import load_dotenv
 # -------------------------------------------------------------------
 # 1. DATABASE CONNECTION
 # -------------------------------------------------------------------
-engine = create_engine('postgresql://postgres:190719@localhost:5432/ecommerce_db')
-print("Database connection successful. Ready for RFM analysis!")
+load_dotenv()
 
+DB_USER = os.getenv("DB_USER")
+DB_PASSWORD = os.getenv("DB_PASSWORD")
+DB_HOST = os.getenv("DB_HOST")
+DB_PORT = os.getenv("DB_PORT")
+DB_NAME = os.getenv("DB_NAME")
+
+DB_URL = f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+
+engine = create_engine(DB_URL)
+print("Database connection successful. Ready for RFM analysis!")
 # -------------------------------------------------------------------
 # 2. SQL QUERY (Data Processing)
 # -------------------------------------------------------------------
@@ -99,5 +109,7 @@ print("\n--- FINAL RFM SEGMENTATION REPORT ---")
 print(rfm_summary)
 
 # Export the final summary to a CSV file for management
-rfm_summary.to_csv('rfm_summary_report.csv')
-print("\nSUCCESS: The final report has been saved as 'rfm_summary_report.csv' in your project folder!")
+os.makedirs("reports", exist_ok=True)
+rfm_summary.to_csv('reports/rfm_summary_report.csv')
+
+print("\nSUCCESS: The final report has been saved as 'reports/rfm_summary_report.csv' in your project folder!")
