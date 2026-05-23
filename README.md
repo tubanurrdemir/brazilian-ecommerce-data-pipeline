@@ -33,6 +33,27 @@ This end-to-end data engineering and analytics project processes real-world e-co
 - A `.env.example` file is provided to show the required configuration format.
 - Hardcoded database passwords were removed from Python scripts.
 
+## ▶️ How to Run This Project
+
+1. Clone the repository.
+2. Install the required Python packages:
+
+```bash
+pip install -r requirements.txt
+```
+3. Create a `.env` file based on `.env.example` and update it with your PostgreSQL credentials.
+4. Run the ETL pipeline:
+
+```bash
+python src/etl_pipeline.py
+```
+5. Run the analytics scripts:
+
+```bash
+python src/cohort_heatmap.py
+python src/rfm_analysis.py
+```
+
 ## ⚙️ Pipeline Architecture
 1. **Extract:** Raw CSV data is ingested using Python.
 2. **Transform:** Data quality issues (e.g., illogical delivery dates, undefined payment types) are cleaned using Pandas.
@@ -78,6 +99,28 @@ Bu uçtan uca veri mühendisliği ve analitiği projesi, Brezilya'ya ait gerçek
 - Gerçek `.env` dosyası `.gitignore` ile GitHub dışında bırakıldı.
 - Gerekli yapılandırma formatını göstermek için `.env.example` dosyası eklendi.
 - Python dosyalarındaki hardcoded veritabanı şifreleri kaldırıldı.
+
+## ▶️ Proje Nasıl Çalıştırılır?
+
+1. Repository bilgisayara indirilir.
+2. Gerekli Python paketleri kurulur:
+
+```bash
+pip install -r requirements.txt
+```
+3. `.env.example` dosyası örnek alınarak bir `.env` dosyası oluşturulur ve PostgreSQL bağlantı bilgileri girilir.
+4. ETL pipeline çalıştırılır:
+
+```bash
+python src/etl_pipeline.py
+```
+5. Analiz scriptleri çalıştırılır:
+
+```bash
+python src/cohort_heatmap.py
+python src/rfm_analysis.py
+```
+
   
 ## ⚙️ Boru Hattı Mimarisi (Pipeline Architecture)
 1. **Extract (Çıkar):** Ham CSV verileri Python kullanılarak sisteme alınır.
