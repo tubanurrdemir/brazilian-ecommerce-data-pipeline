@@ -1,5 +1,7 @@
+import os
 import pandas as pd
 from sqlalchemy import create_engine
+from dotenv import load_dotenv
 import logging
 
 # Configure logging to display professional output in the console
@@ -86,10 +88,20 @@ class EcommerceETL:
             logging.error(f"ETL Pipeline failed with error: {e}")
 
 if __name__ == "__main__":
-    # Database connection parameters
-    # Format: postgresql://username:password@localhost:5432/database_name
-    DB_URL = 'postgresql://postgres:<YOUR_PASSWORD_HERE>@localhost:5432/ecommerce_db'
-    
-    # Instantiate and run the ETL pipeline
+    load_dotenv()
+
+    DB_USER = os.getenv("DB_USER")
+    DB_PASSWORD = os.getenv("DB_PASSWORD")
+    DB_HOST = os.getenv("DB_HOST")
+    DB_PORT = os.getenv("DB_PORT")
+    DB_NAME = os.getenv("DB_NAME")
+
+    required_vars = [DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_NAME]
+
+    if any(value is None for value in required_vars):
+        raise ValueError("Missing database environment variables. Please check your .env file.")
+
+    DB_URL = f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+
     etl_process = EcommerceETL(DB_URL)
     etl_process.run_pipeline()
