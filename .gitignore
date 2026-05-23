@@ -1,0 +1,13 @@
+# Environment variables
+.env
+
+# Python cache files
+__pycache__/
+*.pyc
+
+# Raw and processed data files
+data/raw/
+data/processed/
+
+# macOS system files
+.DS_Store
