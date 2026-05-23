@@ -26,6 +26,13 @@ This end-to-end data engineering and analytics project processes real-world e-co
 * **PostgreSQL:** Relational database management and data modeling.
 * **Tableau:** Interactive data visualization and business intelligence.
 
+## 🔐 Security Practices
+
+- Database credentials are managed using environment variables.
+- The `.env` file is excluded from version control using `.gitignore`.
+- A `.env.example` file is provided to show the required configuration format.
+- Hardcoded database passwords were removed from Python scripts.
+
 ## ⚙️ Pipeline Architecture
 1. **Extract:** Raw CSV data is ingested using Python.
 2. **Transform:** Data quality issues (e.g., illogical delivery dates, undefined payment types) are cleaned using Pandas.
@@ -34,7 +41,7 @@ This end-to-end data engineering and analytics project processes real-world e-co
 5. **Visualize:** The optimized data is connected to Tableau to analyze sales performance, regional distribution, and payment methods.
 
 ### 🧠 Advanced Analytics
-* **Cohort & Retention Analysis:** Wrote advanced SQL queries (CTEs, Date Functions) to track customer retention and calculate churn rates over time. You can view the SQL code [here](cohort_analysis.sql).
+* **Cohort & Retention Analysis:** Wrote advanced SQL queries (CTEs, Date Functions) to track customer retention and calculate churn rates over time. You can view the SQL code [here](sql/cohort_analysis.sql).
 
 ## 📊 Advanced Analytics & Insights
 
@@ -43,8 +50,9 @@ We modeled customer loyalty by tracking monthly purchase cohorts. The retention 
 [![Customer Retention Cohort Heatmap](images/cohort_retention_heatmap.png)](images/cohort_retention_heatmap.png)
 
 ### 2. RFM Segmentation
-The dataset was processed using a custom Python pipeline to evaluate customers based on Recency, Frequency, and Monetary metrics. The final segmented data has been exported as `rfm_summary_report.csv` for targeted marketing campaigns.
-  
+
+The dataset was processed using a custom Python pipeline to evaluate customers based on Recency, Frequency, and Monetary metrics. The final segmented data has been exported as [`rfm_summary_report.csv`](reports/rfm_summary_report.csv) for targeted marketing campaigns.
+
 ---
 
 ## 📝 Proje Özeti (Türkçe)
@@ -64,6 +72,13 @@ Bu uçtan uca veri mühendisliği ve analitiği projesi, Brezilya'ya ait gerçek
 * **PostgreSQL:** İlişkisel veritabanı yönetimi ve veri modelleme.
 * **Tableau:** İnteraktif veri görselleştirme ve iş zekası.
 
+## 🔐 Güvenlik Uygulamaları
+
+- Veritabanı bağlantı bilgileri environment variable yapısı ile yönetildi.
+- Gerçek `.env` dosyası `.gitignore` ile GitHub dışında bırakıldı.
+- Gerekli yapılandırma formatını göstermek için `.env.example` dosyası eklendi.
+- Python dosyalarındaki hardcoded veritabanı şifreleri kaldırıldı.
+  
 ## ⚙️ Boru Hattı Mimarisi (Pipeline Architecture)
 1. **Extract (Çıkar):** Ham CSV verileri Python kullanılarak sisteme alınır.
 2. **Transform (Dönüştür):** Veri kalitesi sorunları (ör. mantıksız teslimat tarihleri, tanımsız ödeme türleri) Pandas kullanılarak temizlenir.
@@ -72,13 +87,14 @@ Bu uçtan uca veri mühendisliği ve analitiği projesi, Brezilya'ya ait gerçek
 5. **Visualize (Görselleştir):** Optimize edilmiş veri, satış performansını, bölgesel dağılımı ve ödeme yöntemlerini analiz etmek için Tableau'ya bağlanır.
 
 ### 🧠 İleri Düzey Analitik
-* **Kohort ve Elde Tutma (Retention) Analizi:** Zaman içindeki müşteri sadakatini izlemek ve kayıp (churn) oranlarını hesaplamak için ileri seviye SQL sorguları (CTE'ler, Tarih Fonksiyonları) yazdım. İlgili SQL kodunu [buradan](images/cohort_analysis.sql) inceleyebilirsiniz.
+* **Kohort ve Elde Tutma (Retention) Analizi:** Zaman içindeki müşteri sadakatini izlemek ve kayıp (churn) oranlarını hesaplamak için ileri seviye SQL sorguları (CTE'ler, Tarih Fonksiyonları) yazdım. İlgili SQL kodunu [buradan](sql/cohort_analysis.sql) inceleyebilirsiniz.
 
 ## 📊 İleri Seviye Veri Analitiği ve İçgörüler
 
 ### 1. Müşteri Elde Tutma (Cohort Analizi)
 Müşteri sadakatini, aylık satın alma kohortlarını (gruplarını) takip ederek modelledik. Aşağıdaki elde tutma (retention) ısı haritası, müşterilerin büyük çoğunluğunun tek seferlik alıcı olduğu klasik e-ticaret problemini net bir şekilde ortaya koymaktadır:
 
-![Müşteri Elde Tutma Isı Haritası](images/cohort_retention_heatmap.png)](images/cohort_retention_heatmap.png)
+[![Müşteri Elde Tutma Isı Haritası](images/cohort_retention_heatmap.png)](images/cohort_retention_heatmap.png)
+
 ### 2. RFM Segmentasyonu
-Veriseti; müşterileri Yenilik (Recency), Sıklık (Frequency) ve Parasal Değer (Monetary) metriklerine göre değerlendirmek ve sınıflandırmak için özel bir Python veri boru hattı (pipeline) kullanılarak işlendi. Hedefli pazarlama kampanyalarında kullanılmak üzere, segmentlere ayrılmış final verisi `rfm_summary_report.csv` olarak dışa aktarıldı.
+Veriseti; müşterileri Yenilik (Recency), Sıklık (Frequency) ve Parasal Değer (Monetary) metriklerine göre değerlendirmek ve sınıflandırmak için özel bir Python veri boru hattı (pipeline) kullanılarak işlendi. Hedefli pazarlama kampanyalarında kullanılmak üzere, segmentlere ayrılmış final rapor [`rfm_summary_report.csv`](reports/rfm_summary_report.csv) olarak dışa aktarıldı.
