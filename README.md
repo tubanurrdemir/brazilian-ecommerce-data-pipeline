@@ -10,6 +10,7 @@
 ## 📝 Project Overview (English)
 This end-to-end data engineering and analytics project processes real-world e-commerce data from Brazil. The goal of this project is to build an automated ETL pipeline, model the data in a relational database, and create an interactive dashboard for actionable business insights.
 
+
 ## Repository Structure
 
 ```text
@@ -18,7 +19,7 @@ This end-to-end data engineering and analytics project processes real-world e-co
 ├── images/       # Project visuals and generated charts
 ├── reports/      # Generated analysis outputs
 └── README.md     # Project documentation
-
+```
 
 ## 🛠️ Tech Stack
 * **Python (Pandas, SQLAlchemy):** Data extraction, cleaning (handling time-traveling records and missing values), and loading.
@@ -57,7 +58,7 @@ Bu uçtan uca veri mühendisliği ve analitiği projesi, Brezilya'ya ait gerçek
 ├── images/       # Projede kullanılan görseller ve oluşturulan grafikler
 ├── reports/      # Analiz sonucunda oluşturulan rapor dosyaları
 └── README.md     # Proje dokümantasyonu
-
+```
 ## 🛠️ Kullanılan Teknolojiler
 * **Python (Pandas, SQLAlchemy):** Veri çekme, temizleme (zaman yolculuğu yapan hatalı kayıtların ve eksik verilerin ayıklanması) ve yükleme.
 * **PostgreSQL:** İlişkisel veritabanı yönetimi ve veri modelleme.
