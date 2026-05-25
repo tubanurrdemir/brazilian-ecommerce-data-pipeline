@@ -98,4 +98,5 @@ plt.yticks(rotation=0)
 
 # Render the visualization
 plt.tight_layout()
+plt.savefig("images/cohort_retention_heatmap.png", dpi=300, bbox_inches="tight")
 plt.show()
