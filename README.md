@@ -86,7 +86,7 @@ Delivery performance was analyzed to understand how shipping delays affect custo
 | Avg Review Score - On-Time Orders | 4.29 |
 
 The SQL queries for this analysis can be found [here](sql/delivery_performance_analysis.sql).
----
+The Tableau dashboard for this analysis is available [here](https://public.tableau.com/app/profile/tuba.nur.demi.r/viz/DeliveryPerformanceDashboard_17797072613630/DeliveryPerformanceDashboard?publish=yes).---
 
 ## 📝 Proje Özeti (Türkçe)
 Bu uçtan uca veri mühendisliği ve analitiği projesi, Brezilya'ya ait gerçek dünya e-ticaret verilerini işlemektedir. Bu projenin amacı; otomatik bir ETL boru hattı kurmak, veriyi ilişkisel bir veritabanında modellemek ve iş kararlarına yön verecek interaktif bir gösterge paneli (dashboard) oluşturmaktır.
@@ -166,3 +166,4 @@ Teslimat performansı, kargo gecikmelerinin müşteri memnuniyetini nasıl etkil
 | Zamanında Teslim Edilen Siparişlerin Ortalama Puanı | 4.29 |
 
 Bu analiz için kullanılan SQL sorgularını [buradan](sql/delivery_performance_analysis.sql) inceleyebilirsiniz.
+Bu analiz için hazırlanan Tableau dashboard'una [buradan](https://public.tableau.com/app/profile/tuba.nur.demi.r/viz/DeliveryPerformanceDashboard_17797072613630/DeliveryPerformanceDashboard?publish=yes) ulaşabilirsiniz.
