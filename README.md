@@ -56,7 +56,7 @@ python src/rfm_analysis.py
 
 ## ⚙️ Pipeline Architecture
 1. **Extract:** Raw CSV data is ingested using Python.
-2. **Transform:** Data quality issues (e.g., illogical delivery dates, undefined payment types) are cleaned using Pandas.
+2. **Transform:** Data quality issues are cleaned using Pandas. Orders are filtered to keep delivered records with valid delivery dates, and undefined payment types are removed from the payments table.
 3. **Load:** Cleaned datasets are loaded directly into a PostgreSQL database.
 4. **Model:** A SQL View (`master_satis_tablosu`) is created to join multiple tables for seamless BI integration.
 5. **Visualize:** The optimized data is connected to Tableau to analyze sales performance, regional distribution, and payment methods.
@@ -124,7 +124,7 @@ python src/rfm_analysis.py
   
 ## ⚙️ Boru Hattı Mimarisi (Pipeline Architecture)
 1. **Extract (Çıkar):** Ham CSV verileri Python kullanılarak sisteme alınır.
-2. **Transform (Dönüştür):** Veri kalitesi sorunları (ör. mantıksız teslimat tarihleri, tanımsız ödeme türleri) Pandas kullanılarak temizlenir.
+2. **Transform (Dönüştür):** Veri kalitesi sorunları Pandas kullanılarak temizlenir. Sipariş tablosunda yalnızca teslim edilmiş ve geçerli teslimat tarihine sahip kayıtlar tutulur; ödeme tablosunda ise tanımsız ödeme türleri temizlenir.
 3. **Load (Yükle):** Temizlenmiş veri setleri doğrudan PostgreSQL veritabanına yüklenir.
 4. **Model (Modelle):** Kesintisiz BI (İş Zekası) entegrasyonu için birden fazla tabloyu birleştiren bir SQL Görünümü (`master_satis_tablosu`) oluşturulur.
 5. **Visualize (Görselleştir):** Optimize edilmiş veri, satış performansını, bölgesel dağılımı ve ödeme yöntemlerini analiz etmek için Tableau'ya bağlanır.
