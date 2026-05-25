@@ -80,7 +80,7 @@ rfm['RFM_Segment'] = rfm['R_Score'].astype(str) + rfm['F_Score'].astype(str) + r
 seg_map = {
     r'[1-2][1-2]': 'Hibernating',
     r'[1-2][3-4]': 'At_Risk',
-    r'[1-2]5': 'Cant_Loose',
+    r'[1-2]5': 'Cant_Lose',
     r'3[1-2]': 'About_to_Sleep',
     r'33': 'Need_Attention',
     r'[3-4][4-5]': 'Loyal_Customers',
