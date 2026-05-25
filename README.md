@@ -74,6 +74,18 @@ We modeled customer loyalty by tracking monthly purchase cohorts. The retention 
 
 The dataset was processed using a custom Python pipeline to evaluate customers based on Recency, Frequency, and Monetary metrics. The final segmented data has been exported as [`rfm_summary_report.csv`](reports/rfm_summary_report.csv) for targeted marketing campaigns.
 
+### 3. Delivery Performance Analysis
+
+Delivery performance was analyzed to understand how shipping delays affect customer satisfaction. The results show that late deliveries significantly reduce customer review scores.
+
+| Metric | Result |
+|---|---:|
+| Average Delivery Time | 12.50 days |
+| Late Delivery Rate | 8.11% |
+| Avg Review Score - Late Orders | 2.57 |
+| Avg Review Score - On-Time Orders | 4.29 |
+
+The SQL queries for this analysis can be found [here](sql/delivery_performance_analysis.sql).
 ---
 
 ## 📝 Proje Özeti (Türkçe)
@@ -141,3 +153,16 @@ Müşteri sadakatini, aylık satın alma kohortlarını (gruplarını) takip ede
 
 ### 2. RFM Segmentasyonu
 Veriseti; müşterileri Yenilik (Recency), Sıklık (Frequency) ve Parasal Değer (Monetary) metriklerine göre değerlendirmek ve sınıflandırmak için özel bir Python veri boru hattı (pipeline) kullanılarak işlendi. Hedefli pazarlama kampanyalarında kullanılmak üzere, segmentlere ayrılmış final rapor [`rfm_summary_report.csv`](reports/rfm_summary_report.csv) olarak dışa aktarıldı.
+
+### 3. Teslimat Performansı Analizi
+
+Teslimat performansı, kargo gecikmelerinin müşteri memnuniyetini nasıl etkilediğini anlamak için analiz edildi. Sonuçlar, geç teslim edilen siparişlerin müşteri yorum puanlarını belirgin şekilde düşürdüğünü göstermektedir.
+
+| Metrik | Sonuç |
+|---|---:|
+| Ortalama Teslimat Süresi | 12.50 gün |
+| Geç Teslimat Oranı | %8.11 |
+| Geç Teslim Edilen Siparişlerin Ortalama Puanı | 2.57 |
+| Zamanında Teslim Edilen Siparişlerin Ortalama Puanı | 4.29 |
+
+Bu analiz için kullanılan SQL sorgularını [buradan](sql/delivery_performance_analysis.sql) inceleyebilirsiniz.
