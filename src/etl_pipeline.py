@@ -2,106 +2,116 @@ import os
 import pandas as pd
 from sqlalchemy import create_engine
 from dotenv import load_dotenv
-import logging
 
-# Configure logging to display professional output in the console
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
-class EcommerceETL:
-    """
-    An ETL (Extract, Transform, Load) pipeline for processing Brazilian E-commerce data
-    and loading it into a PostgreSQL database.
-    """
+# ---------------------------------------------------------
+# DATABASE CONNECTION
+# ---------------------------------------------------------
 
-    def __init__(self, db_connection_string):
-        """Initializes the database connection engine."""
-        self.engine = create_engine(db_connection_string)
-        logging.info("Database connection established successfully.")
+load_dotenv()
 
-    def extract(self, file_path):
-        """Extracts data from a specified CSV file."""
-        logging.info(f"Extracting data from: {file_path}...")
-        return pd.read_csv(file_path)
+DB_USER = os.getenv("DB_USER")
+DB_PASSWORD = os.getenv("DB_PASSWORD")
+DB_HOST = os.getenv("DB_HOST")
+DB_PORT = os.getenv("DB_PORT")
+DB_NAME = os.getenv("DB_NAME")
 
-    def transform_orders(self, df):
-        """
-        Transforms the orders dataset.
-        - Converts string timestamps to datetime objects.
-        - Filters out illogical 'time-traveling' records (delivery before purchase).
-        """
-        logging.info("Transforming 'orders' dataset...")
-        
-        # Convert to datetime
-        df['order_purchase_timestamp'] = pd.to_datetime(df['order_purchase_timestamp'])
-        df['order_delivered_customer_date'] = pd.to_datetime(df['order_delivered_customer_date'])
-        
-        # Keep valid deliveries OR orders that are not yet delivered (NaT)
-        valid_dates = df['order_delivered_customer_date'] >= df['order_purchase_timestamp']
-        not_delivered_yet = df['order_delivered_customer_date'].isna()
-        
-        df_cleaned = df[valid_dates | not_delivered_yet]
-        return df_cleaned
+required_vars = [DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_NAME]
 
-    def transform_payments(self, df):
-        """
-        Transforms the payments dataset.
-        - Removes invalid or 'not_defined' payment types.
-        """
-        logging.info("Transforming 'order_payments' dataset...")
-        df_cleaned = df[df['payment_type'] != 'not_defined']
-        return df_cleaned
+if any(value is None for value in required_vars):
+    raise ValueError("Missing database environment variables. Please check your .env file.")
 
-    def load(self, df, table_name):
-        """Loads the transformed pandas DataFrame into the PostgreSQL database."""
-        logging.info(f"Loading data into PostgreSQL table: '{table_name}'...")
-        df.to_sql(table_name, self.engine, if_exists='replace', index=False)
-        logging.info(f"Table '{table_name}' loaded successfully.")
+database_url = f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+engine = create_engine(database_url)
 
-    def run_pipeline(self):
-        """Executes the complete ETL workflow."""
-        try:
-            # 1. Process Orders
-            df_orders = self.extract('olist_orders_dataset.csv')
-            df_orders = self.transform_orders(df_orders)
-            self.load(df_orders, 'orders')
+print("Database connection established successfully.")
 
-            # 2. Process Payments
-            df_payments = self.extract('olist_order_payments_dataset.csv')
-            df_payments = self.transform_payments(df_payments)
-            self.load(df_payments, 'order_payments')
 
-            # 3. Process Customers (Extract & Load directly)
-            df_customers = self.extract('olist_customers_dataset.csv')
-            self.load(df_customers, 'customers')
+# ---------------------------------------------------------
+# 1. ORDERS TABLE CLEANING
+# ---------------------------------------------------------
 
-            # 4. Process Order Items (Extract & Load directly)
-            df_items = self.extract('olist_order_items_dataset.csv')
-            self.load(df_items, 'order_items')
+df_orders = pd.read_csv("olist_orders_dataset.csv")
 
-            # 5. Process Products (Extract & Load directly)
-            df_products = self.extract('olist_products_dataset.csv')
-            self.load(df_products, 'products')
+# Convert order date columns from text to datetime format
+df_orders["order_purchase_timestamp"] = pd.to_datetime(
+    df_orders["order_purchase_timestamp"],
+    errors="coerce"
+)
 
-            logging.info("🚀 ETL Pipeline completed successfully!")
+df_orders["order_delivered_customer_date"] = pd.to_datetime(
+    df_orders["order_delivered_customer_date"],
+    errors="coerce"
+)
 
-        except Exception as e:
-            logging.error(f"ETL Pipeline failed with error: {e}")
+df_orders["order_estimated_delivery_date"] = pd.to_datetime(
+    df_orders["order_estimated_delivery_date"],
+    errors="coerce"
+)
 
-if __name__ == "__main__":
-    load_dotenv()
+# Keep only delivered orders with valid delivery dates.
+# This cleaned table is used for delivery-based analytics.
+df_orders = df_orders[
+    (df_orders["order_status"] == "delivered") &
+    (df_orders["order_delivered_customer_date"].notna()) &
+    (df_orders["order_delivered_customer_date"] >= df_orders["order_purchase_timestamp"])
+]
 
-    DB_USER = os.getenv("DB_USER")
-    DB_PASSWORD = os.getenv("DB_PASSWORD")
-    DB_HOST = os.getenv("DB_HOST")
-    DB_PORT = os.getenv("DB_PORT")
-    DB_NAME = os.getenv("DB_NAME")
+df_orders.to_sql("orders", engine, if_exists="replace", index=False)
+print("orders table cleaned and loaded successfully.")
 
-    required_vars = [DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_NAME]
 
-    if any(value is None for value in required_vars):
-        raise ValueError("Missing database environment variables. Please check your .env file.")
+# ---------------------------------------------------------
+# 2. ORDER PAYMENTS TABLE CLEANING
+# ---------------------------------------------------------
 
-    DB_URL = f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+df_payments = pd.read_csv("olist_order_payments_dataset.csv")
 
-    etl_process = EcommerceETL(DB_URL)
-    etl_process.run_pipeline()
+# Remove undefined payment records
+df_payments = df_payments[df_payments["payment_type"] != "not_defined"]
+
+df_payments.to_sql("order_payments", engine, if_exists="replace", index=False)
+print("order_payments table cleaned and loaded successfully.")
+
+
+# ---------------------------------------------------------
+# 3. CUSTOMERS TABLE LOAD
+# ---------------------------------------------------------
+
+df_customers = pd.read_csv("olist_customers_dataset.csv")
+
+df_customers.to_sql("customers", engine, if_exists="replace", index=False)
+print("customers table loaded successfully.")
+
+
+# ---------------------------------------------------------
+# 4. ORDER ITEMS TABLE LOAD
+# ---------------------------------------------------------
+
+df_order_items = pd.read_csv("olist_order_items_dataset.csv")
+
+df_order_items.to_sql("order_items", engine, if_exists="replace", index=False)
+print("order_items table loaded successfully.")
+
+
+# ---------------------------------------------------------
+# 5. PRODUCTS TABLE LOAD
+# ---------------------------------------------------------
+
+df_products = pd.read_csv("olist_products_dataset.csv")
+
+df_products.to_sql("products", engine, if_exists="replace", index=False)
+print("products table loaded successfully.")
+
+
+# ---------------------------------------------------------
+# 6. ORDER REVIEWS TABLE LOAD
+# ---------------------------------------------------------
+
+df_reviews = pd.read_csv("olist_order_reviews_dataset.csv")
+
+df_reviews.to_sql("order_reviews", engine, if_exists="replace", index=False)
+print("order_reviews table loaded successfully.")
+
+
+print("ETL process completed successfully.")
